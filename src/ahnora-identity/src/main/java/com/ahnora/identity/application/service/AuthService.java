@@ -7,6 +7,7 @@ import com.ahnora.common.core.security.SecurityConstants;
 import com.ahnora.identity.application.dto.auth.AuthResponse;
 import com.ahnora.identity.application.dto.auth.LoginRequest;
 import com.ahnora.identity.application.dto.auth.RegisterRequest;
+import com.ahnora.identity.application.dto.auth.SwitchTenantRequest;
 import com.ahnora.identity.domain.model.*;
 import com.ahnora.identity.infrastructure.persistence.entity.MembershipEntity;
 import com.ahnora.identity.infrastructure.persistence.entity.OrganizationEntity;
@@ -108,5 +109,12 @@ public class AuthService {
                 user.getEmail(),
                 SecurityConstants.UNSCOPED_USER_ROLES
         );
+    }
+
+    // TODO(TASK-003): implement tenant switching. Body was empty in the original WIP;
+    // kept as a failing stub so the module compiles. Validate target membership + issue
+    // a scoped JWT here (mirror login()).
+    public AuthResponse switchTenant(SwitchTenantRequest request) {
+        throw new UnsupportedOperationException("switchTenant is not implemented yet");
     }
 }
