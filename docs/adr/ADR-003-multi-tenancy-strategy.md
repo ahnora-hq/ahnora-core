@@ -16,7 +16,7 @@ ACCEPTED
 
 ## Context
 
-AgentForge serves multiple organizations and must prevent cross-tenant access.
+Ahnora serves multiple organizations and must prevent cross-tenant access.
 
 ## Decision
 

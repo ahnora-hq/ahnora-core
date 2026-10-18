@@ -2,14 +2,14 @@
 name: implement-feature
 description: >-
   Use this skill when implementing a new feature or modifying existing behavior
-  in the AgentForge platform. Guides the agent through the full development
+  in the Ahnora platform. Guides the agent through the full development
   workflow from requirement analysis to verified implementation.
 ---
 
 # Feature Implementation Skill
 
 This skill defines the end-to-end workflow for implementing features in
-AgentForge. Follow these steps in order.
+Ahnora. Follow these steps in order.
 
 ## Phase 1 — Understand
 

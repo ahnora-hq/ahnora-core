@@ -1,14 +1,14 @@
 ---
 name: test-writer
 description: >-
-  Use this skill when writing or updating tests for AgentForge services.
+  Use this skill when writing or updating tests for Ahnora services.
   Covers unit, integration, API, contract, and E2E test patterns specific
-  to the AgentForge tech stack (Java 21, Spring Boot, Testcontainers).
+  to the Ahnora tech stack (Java 21, Spring Boot, Testcontainers).
 ---
 
 # Test Writer Skill
 
-Write tests that match the AgentForge testing strategy.
+Write tests that match the Ahnora testing strategy.
 
 ## Test Categories
 

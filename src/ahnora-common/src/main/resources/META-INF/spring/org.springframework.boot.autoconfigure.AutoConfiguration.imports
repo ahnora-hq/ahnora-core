@@ -1,0 +1,2 @@
+com.ahnora.common.config.AhnoraJacksonAutoConfiguration
+com.ahnora.common.config.AhnoraWebAutoConfiguration

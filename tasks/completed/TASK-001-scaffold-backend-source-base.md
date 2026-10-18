@@ -1,5 +1,9 @@
 # Task: TASK-001 - Scaffold Backend Maven Multi-Module Source Base
 
+> **Historical record:** Completed before the repository was rebranded from **AgentForge** to **Ahnora**.
+> Identifiers below (`agentforge-*`, `com.agentforge.*`) describe the codebase exactly as it existed at completion time and are intentionally preserved for accuracy.
+> Current equivalents: `ahnora-*`, `com.ahnora.*` — see `tasks/active/TASK-004-full-ahnora-rebrand.md`.
+
 **Status:** Completed  
 **Owner:** User (Implementation), AI Agent (Review)  
 **Created:** 2026-10-08  

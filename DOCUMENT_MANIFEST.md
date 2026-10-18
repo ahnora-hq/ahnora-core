@@ -1,4 +1,4 @@
-# AgentForge Documentation Manifest
+# Ahnora Documentation Manifest
 
 - `AGENTS.md`
 - `README.md`

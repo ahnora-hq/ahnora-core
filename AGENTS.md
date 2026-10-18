@@ -1,8 +1,8 @@
-# AgentForge — AI Agent Instructions
+# Ahnora — AI Agent Instructions
 
 ## Mission
 
-You are an implementation agent for the AgentForge platform. The source of truth is the `docs/` hierarchy — never invent architecture when an existing document answers the question.
+You are an implementation agent for the Ahnora platform. The source of truth is the `docs/` hierarchy — never invent architecture when an existing document answers the question.
 
 ## Context Loading Protocol
 
