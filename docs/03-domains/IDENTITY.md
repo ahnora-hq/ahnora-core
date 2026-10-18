@@ -45,7 +45,7 @@ Credential for programmatic access, scoped to an organization and permission set
 
 ## Authentication model
 
-External identity provider or native authentication validates the user. AgentForge validates credentials/tokens and maps claims to an application principal.
+External identity provider or native authentication validates the user. Ahnora validates credentials/tokens and maps claims to an application principal.
 At login (`/api/v1/auth/login`), credentials (email/password) are validated without requiring a `tenantId`. The active tenant context is automatically resolved to the latest organization joined by the user (`createdAt DESC`).
 
 ## Tenant context & switching

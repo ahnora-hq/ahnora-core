@@ -4,22 +4,22 @@ description: >-
   Use this skill when orchestrating a full development workflow that involves
   multiple subagents. Defines how the primary agent coordinates context loading,
   implementation, testing, code review, and documentation updates using the
-  specialized AgentForge subagents.
+  specialized Ahnora subagents.
 ---
 
 # Workflow Orchestration Skill
 
-This skill defines how to coordinate the AgentForge subagent team for
+This skill defines how to coordinate the Ahnora subagent team for
 end-to-end development workflows.
 
 ## Available Subagents
 
 | Subagent | Model | Role | Write Tools |
 |---|---|---|---|
-| `agentforge-context-researcher` | `flash` | Load & summarize source-of-truth docs | No |
-| `agentforge-test-runner` | `flash` | Write & run tests | Yes |
-| `agentforge-code-reviewer` | `pro` | Deep code review against invariants | No |
-| `agentforge-doc-updater` | `flash` | Update docs when contracts/behavior change | Yes |
+| `ahnora-context-researcher` | `flash` | Load & summarize source-of-truth docs | No |
+| `ahnora-test-runner` | `flash` | Write & run tests | Yes |
+| `ahnora-code-reviewer` | `pro` | Deep code review against invariants | No |
+| `ahnora-doc-updater` | `flash` | Update docs when contracts/behavior change | Yes |
 
 ## Orchestration Patterns
 
@@ -33,7 +33,7 @@ end-to-end development workflows.
        │
        ▼
 ┌──────────────────────┐
-│  1. Context Research  │  ← agentforge-context-researcher (flash)
+│  1. Context Research  │  ← ahnora-context-researcher (flash)
 │  Load relevant docs   │
 └──────┬───────────────┘
        │
@@ -57,7 +57,7 @@ end-to-end development workflows.
        │
        ▼
 ┌──────────────────────┐
-│  5. Doc Updater       │  ← agentforge-doc-updater (flash)
+│  5. Doc Updater       │  ← ahnora-doc-updater (flash)
 │  Update if needed     │
 └──────────────────────┘
 ```
@@ -68,15 +68,15 @@ For small, local changes within a single service:
 
 1. **You** (orchestrator): Load context yourself (constitution triad + 1-2 domain docs)
 2. **You**: Implement the change
-3. **agentforge-test-runner**: Write/run tests
+3. **ahnora-test-runner**: Write/run tests
 4. Done — no full review needed for trivial changes
 
 ### Pattern 3: Architecture Decision
 
-1. **agentforge-context-researcher**: Load relevant ADRs and architecture docs
+1. **ahnora-context-researcher**: Load relevant ADRs and architecture docs
 2. **You**: Analyze and draft ADR (or use `adr-writer` skill)
-3. **agentforge-code-reviewer**: Review the ADR
-4. **agentforge-doc-updater**: Update affected source-of-truth docs
+3. **ahnora-code-reviewer**: Review the ADR
+4. **ahnora-doc-updater**: Update affected source-of-truth docs
 5. Then implement using Pattern 1
 
 ## Token Optimization Rules
@@ -93,7 +93,7 @@ For small, local changes within a single service:
 ### Invoke context researcher:
 ```
 invoke_subagent(
-  TypeName="agentforge-context-researcher",
+  TypeName="ahnora-context-researcher",
   Model="flash",
   Prompt="Load context for the Agent bounded context. The task is: <description>"
 )
@@ -102,7 +102,7 @@ invoke_subagent(
 ### Invoke test runner:
 ```
 invoke_subagent(
-  TypeName="agentforge-test-runner",
+  TypeName="ahnora-test-runner",
   Model="flash",
   Prompt="Write unit and integration tests for <class/feature>. Files changed: <list>"
 )
@@ -111,7 +111,7 @@ invoke_subagent(
 ### Invoke code reviewer:
 ```
 invoke_subagent(
-  TypeName="agentforge-code-reviewer",
+  TypeName="ahnora-code-reviewer",
   Model="pro",
   Prompt="Review the following changes: <diff or file list>. Focus on: <specific concerns>"
 )
@@ -120,7 +120,7 @@ invoke_subagent(
 ### Invoke doc updater:
 ```
 invoke_subagent(
-  TypeName="agentforge-doc-updater",
+  TypeName="ahnora-doc-updater",
   Model="flash",
   Prompt="Update docs/04-contracts/REST_API.md to reflect: <change description>"
 )

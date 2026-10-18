@@ -12,7 +12,7 @@ depends_on:
 
 ## Logical target
 
-AgentForge has the following logical boundaries:
+Ahnora has the following logical boundaries:
 
 - Identity/Tenant
 - Agent

@@ -34,7 +34,7 @@ Keys must include tenant scope when data is tenant-owned.
 
 Example:
 
-`agentforge:{tenantId}:agent:{agentId}:...`
+`ahnora:{tenantId}:agent:{agentId}:...`
 
 ## Failure
 

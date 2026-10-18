@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ahnora logo">
+  <defs>
+    <linearGradient id="ahnora-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="55%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#ahnora-gradient)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 52 L32 12 L48 52"/>
+    <path d="M23 38 H41" stroke-width="6"/>
+  </g>
+</svg>
