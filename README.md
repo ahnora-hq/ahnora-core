@@ -1,6 +1,12 @@
-# ⚡ AgentForge
+<p align="center">
+  <img src="brand/ahnora-logo.svg" alt="Ahnora logo" width="96">
+</p>
 
-> **Production-grade, multi-tenant AI Agent Platform engineered for enterprise workflows, autonomous execution pipelines, and robust LLM orchestration.**
+# ⚡ Ahnora
+
+> **Open intelligence. Built together.**
+>
+> **Ahnora is an open-source platform for building, orchestrating, and operating AI agents.**
 
 [![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.org/projects/jdk/21/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
@@ -13,9 +19,12 @@
 
 ## 🎯 Overview
 
-**AgentForge** is an enterprise AI Agent runtime and builder platform. It enables organizations to define, version, deploy, and monitor autonomous AI agents with hardened tenant isolation, transactional safety, and observable streaming execution.
+**Ahnora** enables organizations to define, version, deploy, and monitor AI agents through a controlled, multi-tenant platform rather than building bespoke agent infrastructure for every use case.
 
-### Key Capabilities
+> 🚧 **Project status:** Ahnora is under active development (Phase 0/1 of the [Roadmap](docs/01-product/ROADMAP.md)).
+> The goals below describe the platform's target architecture; consult the roadmap for what is implemented today.
+
+### Design goals
 
 * 🏢 **True Multi-Tenancy:** Hardened tenant isolation enforced at the context holder, database queries, and messaging boundaries.
 * 📜 **Immutable Agent Versions:** Published agent configurations are frozen and reproducible—never mutating in place.
@@ -32,12 +41,12 @@ The platform is organized into clean, decoupled bounded contexts:
 
 ```text
 src/
-├── agentforge-parent/          # Root BOM and build configuration
-├── agentforge-common/          # Shared kernel: TenantContext, CloudEvents, errors & filters
-├── agentforge-identity/        # Organizations, Users, Memberships, API Keys, and Auth
-├── agentforge-agent/           # Agent definitions, versions, and prompt templates
-├── agentforge-execution/       # Workflow execution runtime & state machines
-└── agentforge-knowledge/       # Document ingestion and vector search pipelines
+├── ahnora-parent/          # Root BOM and build configuration
+├── ahnora-common/          # Shared kernel: TenantContext, CloudEvents, errors & filters
+├── ahnora-identity/        # Organizations, Users, Memberships, API Keys, and Auth
+├── ahnora-agent/           # Agent definitions, versions, and prompt templates
+├── ahnora-execution/       # Workflow execution runtime & state machines
+└── ahnora-knowledge/       # Document ingestion and vector search pipelines
 ```
 
 ---
@@ -64,7 +73,7 @@ mvn clean test
 
 ## 📚 Source of Truth & Documentation
 
-AgentForge enforces strict architectural governance. The documentation hierarchy defines system invariants:
+Ahnora enforces strict architectural governance. The documentation hierarchy defines system invariants:
 
 1. **Constitutional Invariants:** [`docs/00-constitution/PROJECT_CONSTITUTION.md`](docs/00-constitution/PROJECT_CONSTITUTION.md)
 2. **Engineering Principles:** [`docs/00-constitution/ENGINEERING_PRINCIPLES.md`](docs/00-constitution/ENGINEERING_PRINCIPLES.md)
@@ -76,10 +85,14 @@ AgentForge enforces strict architectural governance. The documentation hierarchy
 
 ---
 
-## 🌐 Ecosystem Roadmap (`agentforge-hq`)
+## 🌐 Ecosystem Roadmap
 
-* **`agentforge`** (Current): Core platform backend and orchestration engine.
-* **`agentforge-studio`**: Visual Web UI for agent design, prompt tuning, and trace inspection.
-* **`agentforge-python`**: Python SDK for data scientists and AI pipelines.
-* **`agentforge-node`**: TypeScript / JavaScript client library.
-* **`agentforge-helm`**: Kubernetes deployment charts and Terraform infrastructure.
+> Repository names below follow the Ahnora naming. The project is currently hosted at
+> [`github.com/agentforge-hq/agentforge`](https://github.com/agentforge-hq/agentforge);
+> the organization and repository names will only change when that external migration is performed.
+
+* **`ahnora`** (Current): Core platform backend and orchestration engine.
+* **`ahnora-studio`**: Visual Web UI for agent design, prompt tuning, and trace inspection.
+* **`ahnora-python`**: Python SDK for data scientists and AI pipelines.
+* **`ahnora-node`**: TypeScript / JavaScript client library.
+* **`ahnora-helm`**: Kubernetes deployment charts and Terraform infrastructure.

@@ -12,7 +12,7 @@ related:
 
 # Product Vision
 
-AgentForge enables teams to design, publish, execute, and observe AI agents through a controlled platform rather than building bespoke agent infrastructure for every use case.
+Ahnora enables teams to design, publish, execute, and observe AI agents through a controlled platform rather than building bespoke agent infrastructure for every use case.
 
 ## Target users
 
@@ -31,7 +31,7 @@ A Production Incident Analyst agent can combine approved knowledge retrieval, pr
 
 ## Long-term direction
 
-AgentForge should become a reusable platform for governed AI execution:
+Ahnora should become a reusable platform for governed AI execution:
 
 - configurable agents
 - safe tools

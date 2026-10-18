@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" role="img" aria-label="Ahnora wordmark">
+  <defs>
+    <linearGradient id="ahnora-wordmark-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="55%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="ahnora-wordmark-text" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#ahnora-wordmark-gradient)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 52 L32 12 L48 52"/>
+    <path d="M23 38 H41" stroke-width="6"/>
+  </g>
+  <text x="66" y="46" font-family="'Segoe UI', ui-sans-serif, system-ui, -apple-system, Helvetica, Arial, sans-serif"
+        font-size="36" font-weight="700" letter-spacing="0.5" fill="url(#ahnora-wordmark-text)">Ahnora</text>
+</svg>

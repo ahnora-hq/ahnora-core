@@ -1,14 +1,14 @@
 ---
 name: code-review
 description: >-
-  Use this skill when performing code review on AgentForge changes. Provides
+  Use this skill when performing code review on Ahnora changes. Provides
   the complete review checklist derived from the project's coding standards,
   constitution, and engineering principles.
 ---
 
 # Code Review Skill
 
-Perform code review against the AgentForge quality bar.
+Perform code review against the Ahnora quality bar.
 
 ## Review Checklist
 

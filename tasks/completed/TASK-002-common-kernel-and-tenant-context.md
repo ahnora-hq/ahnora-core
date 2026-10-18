@@ -1,5 +1,9 @@
 # Task: TASK-002 - Implement Common Kernel & Tenant Context
 
+> **Historical record:** Completed before the repository was rebranded from **AgentForge** to **Ahnora**.
+> Identifiers below (`agentforge-common`, `com.agentforge.*`, `AgentForge*`) describe the codebase exactly as it existed at completion time and are intentionally preserved for accuracy.
+> Current equivalents: `ahnora-common`, `com.ahnora.*`, `Ahnora*` — see `tasks/active/TASK-004-full-ahnora-rebrand.md`.
+
 **Status:** Completed  
 **Owner:** User (Implementation), AI Agent (Review)  
 **Depends On:** TASK-001  

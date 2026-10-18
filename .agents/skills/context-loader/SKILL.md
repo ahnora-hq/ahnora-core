@@ -1,14 +1,14 @@
 ---
 name: context-loader
 description: >-
-  Use this skill when a task touches a specific AgentForge bounded context
+  Use this skill when a task touches a specific Ahnora bounded context
   and you need to load the minimal, relevant source-of-truth documents into
   context. Prevents loading the entire docs/ tree and keeps token usage low.
 ---
 
 # Context Loader Skill
 
-This skill implements **progressive context loading** for the AgentForge
+This skill implements **progressive context loading** for the Ahnora
 source-of-truth hierarchy. Instead of reading all 40+ documents, the agent
 identifies which bounded context is affected and loads only the required slice.
 
