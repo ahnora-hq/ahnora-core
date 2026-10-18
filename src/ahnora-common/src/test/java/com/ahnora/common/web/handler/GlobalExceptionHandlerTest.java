@@ -1,8 +1,9 @@
 package com.ahnora.common.web.handler;
 
+import com.ahnora.common.core.exception.AhnoraException;
 import com.ahnora.common.core.exception.EntityNotFoundException;
-import com.ahnora.common.core.exception.ErrorCode;
-import com.ahnora.common.core.exception.TenantAccessDeniedException;
+import com.ahnora.common.core.exception.ErrorCodes;
+import com.ahnora.common.core.exception.PermissionDeniedException;
 import com.ahnora.common.web.filter.CorrelationIdFilter;
 import com.ahnora.common.web.response.ErrorResponse;
 import org.junit.jupiter.api.AfterEach;
@@ -24,30 +25,45 @@ class GlobalExceptionHandlerTest {
     }
 
     @Test
-    @DisplayName("should map EntityNotFoundException to 404 ErrorResponse")
+    @DisplayName("should map EntityNotFoundException to 404 with the generic NOT_FOUND code")
     void shouldHandleEntityNotFoundException() {
         MDC.put(CorrelationIdFilter.MDC_CORRELATION_ID_KEY, "test-corr-id");
-        EntityNotFoundException ex = new EntityNotFoundException(ErrorCode.AGENT_NOT_FOUND, "Agent not found");
+        EntityNotFoundException ex = new EntityNotFoundException("Agent not found");
 
         ResponseEntity<ErrorResponse> response = handler.handleAhnoraException(ex);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().code()).isEqualTo(ErrorCode.AGENT_NOT_FOUND.name());
+        assertThat(response.getBody().code()).isEqualTo(ErrorCodes.NOT_FOUND);
         assertThat(response.getBody().message()).isEqualTo("Agent not found");
         assertThat(response.getBody().correlationId()).isEqualTo("test-corr-id");
     }
 
     @Test
-    @DisplayName("should map TenantAccessDeniedException to 403 ErrorResponse")
-    void shouldHandleTenantAccessDeniedException() {
-        TenantAccessDeniedException ex = new TenantAccessDeniedException("Access denied to tenant");
+    @DisplayName("should map PermissionDeniedException with TENANT_ACCESS_DENIED to 403")
+    void shouldHandleTenantAccessDenied() {
+        PermissionDeniedException ex =
+                new PermissionDeniedException(ErrorCodes.TENANT_ACCESS_DENIED, "Access denied to tenant");
 
         ResponseEntity<ErrorResponse> response = handler.handleAhnoraException(ex);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().code()).isEqualTo(ErrorCode.TENANT_ACCESS_DENIED.name());
+        assertThat(response.getBody().code()).isEqualTo(ErrorCodes.TENANT_ACCESS_DENIED);
+    }
+
+    @Test
+    @DisplayName("should pass through a service-defined code and its status unchanged")
+    void shouldPassThroughServiceSpecificCode() {
+        AhnoraException ex = new AhnoraException("AGENT_VERSION_IMMUTABLE", 409,
+                "Published agent version is immutable and cannot be modified.");
+
+        ResponseEntity<ErrorResponse> response = handler.handleAhnoraException(ex);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().code()).isEqualTo("AGENT_VERSION_IMMUTABLE");
+        assertThat(response.getBody().message()).contains("immutable");
     }
 
     @Test
@@ -59,7 +75,7 @@ class GlobalExceptionHandlerTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().code()).isEqualTo(ErrorCode.INTERNAL_ERROR.name());
+        assertThat(response.getBody().code()).isEqualTo(ErrorCodes.INTERNAL_ERROR);
         assertThat(response.getBody().message()).doesNotContain("Database connection");
         assertThat(response.getBody().details()).isEmpty();
     }

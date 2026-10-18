@@ -1,7 +1,5 @@
 package com.ahnora.common.web.response;
 
-import com.ahnora.common.core.exception.ErrorCode;
-
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -23,13 +21,5 @@ public record ErrorResponse(
 
     public static ErrorResponse of(String code, String message, String correlationId, Map<String, Object> details) {
         return new ErrorResponse(code, message, correlationId, details);
-    }
-
-    public static ErrorResponse of(ErrorCode errorCode, String message, String correlationId, Map<String, Object> details) {
-        return new ErrorResponse(errorCode.name(), message, correlationId, details);
-    }
-
-    public static ErrorResponse of(ErrorCode errorCode, String correlationId) {
-        return new ErrorResponse(errorCode.name(), errorCode.getDefaultMessage(), correlationId, Collections.emptyMap());
     }
 }

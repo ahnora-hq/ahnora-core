@@ -98,7 +98,7 @@ Append a user message.
 
 ```json
 {
-  "code": "AGENT_NOT_FOUND",
+  "code": "NOT_FOUND",
   "message": "Agent was not found.",
   "correlationId": "uuid",
   "details": {}

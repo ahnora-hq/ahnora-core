@@ -1,7 +1,9 @@
 package com.ahnora.identity.application.service;
 
+import com.ahnora.common.core.context.TenantContextHolder;
 import com.ahnora.common.core.exception.ConflictException;
-import com.ahnora.common.core.exception.ErrorCode;
+import com.ahnora.common.core.exception.EntityNotFoundException;
+import com.ahnora.common.core.exception.ErrorCodes;
 import com.ahnora.common.core.exception.UnauthorizedException;
 import com.ahnora.common.core.security.SecurityConstants;
 import com.ahnora.identity.application.dto.auth.AuthResponse;
@@ -49,14 +51,14 @@ public class AuthService {
     @Transactional
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmailIgnoreCase(request.email())) {
-            throw new ConflictException(ErrorCode.USER_ALREADY_EXISTS, String.format("User with email %s already exists.", request.email()));
+            throw new ConflictException(String.format("User with email %s already exists.", request.email()));
         }
 
         String slug;
         if (request.organizationSlug() != null && !request.organizationSlug().isBlank()) {
             slug = Organization.slugify(request.organizationSlug());
             if (organizationRepository.existsBySlug(slug)) {
-                throw new ConflictException(ErrorCode.ORGANIZATION_ALREADY_EXISTS, String.format("Organization with slug %s already exists.", slug));
+                throw new ConflictException(String.format("Organization with slug %s already exists.", slug));
             }
         } else {
             String baseSlug = Organization.slugify(request.organizationName());
@@ -87,11 +89,11 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
         User user = (userRepository.findByEmailIgnoreCase(request.email())
-                .orElseThrow(() -> new UnauthorizedException(ErrorCode.UNAUTHORIZED, "Invalid credentials")))
+                .orElseThrow(() -> new UnauthorizedException(ErrorCodes.UNAUTHORIZED, "Invalid credentials")))
                 .toDomain();
 
         if (!passwordEncoder.matches(request.password(), user.getPasswordHash())) {
-            throw new UnauthorizedException(ErrorCode.UNAUTHORIZED, "Invalid credentials");
+            throw new UnauthorizedException(ErrorCodes.UNAUTHORIZED, "Invalid credentials");
         }
 
         String accessToken = jwtTokenProvider.generateToken(
@@ -111,10 +113,13 @@ public class AuthService {
         );
     }
 
-    // TODO(TASK-003): implement tenant switching. Body was empty in the original WIP;
-    // kept as a failing stub so the module compiles. Validate target membership + issue
-    // a scoped JWT here (mirror login()).
+    // TODO(TASK-003): implement tenant switching. The lookup below is the only implemented
+    // part; validate target membership + issue a scoped JWT here (mirror login()).
     public AuthResponse switchTenant(SwitchTenantRequest request) {
-        throw new UnsupportedOperationException("switchTenant is not implemented yet");
+        MembershipEntity membershipEntity = membershipRepository.findByOrganizationIdAndUserId(
+                request.targetTenantId(), UUID.fromString(TenantContextHolder.getRequiredContext().userId())
+        ).orElseThrow(() -> new EntityNotFoundException("Membership was not found for the target tenant."));
+
+        throw new UnsupportedOperationException("Tenant switching is not implemented yet (TASK-003).");
     }
 }

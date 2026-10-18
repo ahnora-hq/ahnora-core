@@ -3,7 +3,7 @@ package com.ahnora.common.web.filter;
 import com.ahnora.common.core.context.TenantContext;
 import com.ahnora.common.core.context.TenantContextHolder;
 import com.ahnora.common.core.domain.TenantId;
-import com.ahnora.common.core.exception.ErrorCode;
+import com.ahnora.common.core.exception.ErrorCodes;
 import com.ahnora.common.core.exception.ValidationException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -39,7 +39,6 @@ public class TenantContextFilter extends OncePerRequestFilter {
                 tenantId = TenantId.fromString(tenantHeader);
             } catch (IllegalArgumentException ex) {
                 throw new ValidationException(
-                        ErrorCode.VALIDATION_ERROR,
                         "Invalid " + TENANT_ID_HEADER + " header format: " + tenantHeader,
                         Map.of("header", TENANT_ID_HEADER, "value", tenantHeader)
                 );

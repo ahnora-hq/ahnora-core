@@ -1,7 +1,7 @@
 package com.ahnora.common.web.handler;
 
 import com.ahnora.common.core.exception.AhnoraException;
-import com.ahnora.common.core.exception.ErrorCode;
+import com.ahnora.common.core.exception.ErrorCodes;
 import com.ahnora.common.web.filter.CorrelationIdFilter;
 import com.ahnora.common.web.response.ErrorResponse;
 import org.slf4j.Logger;
@@ -30,10 +30,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleAhnoraException(AhnoraException ex) {
         String correlationId = resolveCorrelationId(ex.getCorrelationId());
         log.warn("Handled business exception [{}]: {} (correlationId={})",
-                ex.getErrorCode(), ex.getMessage(), correlationId);
+                ex.getCode(), ex.getMessage(), correlationId);
 
         ErrorResponse errorResponse = ErrorResponse.of(
-                ex.getErrorCode(),
+                ex.getCode(),
                 ex.getMessage(),
                 correlationId,
                 ex.getDetails()
@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
         log.warn("Request validation failed: {} (correlationId={})", fieldErrors, correlationId);
 
         ErrorResponse errorResponse = ErrorResponse.of(
-                ErrorCode.VALIDATION_ERROR,
+                ErrorCodes.VALIDATION_ERROR,
                 "Request validation failed.",
                 correlationId,
                 fieldErrors
@@ -69,7 +69,7 @@ public class GlobalExceptionHandler {
         log.warn("Illegal argument: {} (correlationId={})", ex.getMessage(), correlationId);
 
         ErrorResponse errorResponse = ErrorResponse.of(
-                ErrorCode.VALIDATION_ERROR,
+                ErrorCodes.VALIDATION_ERROR,
                 ex.getMessage(),
                 correlationId,
                 Map.of()
@@ -85,8 +85,8 @@ public class GlobalExceptionHandler {
         log.error("Unhandled server exception (correlationId={}): ", correlationId, ex);
 
         ErrorResponse errorResponse = ErrorResponse.of(
-                ErrorCode.INTERNAL_ERROR,
-                ErrorCode.INTERNAL_ERROR.getDefaultMessage(),
+                ErrorCodes.INTERNAL_ERROR,
+                "An unexpected internal server error occurred.",
                 correlationId,
                 Map.of()
         );
